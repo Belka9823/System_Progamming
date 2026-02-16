@@ -1,6 +1,7 @@
 # System_Progamming
 
-```graph TD
+```mermaid
+graph TD
     A([Начало]) --> B[Инициализация массивов-пресетов]
     B --> C[/Вывод списка и ввод номера пресета UserInput/]
     
