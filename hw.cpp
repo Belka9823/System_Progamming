@@ -1,58 +1,83 @@
-# include <iostream>
-# include <cstdlib>
-# include <string>
-# include "LibHelp.h"
+#include <iostream>
+#include <vector>
+#include <queue>
 
-using namespace std;
-
-
-/* void gethelp()
+void printQueue (std::queue <int> q , const std::string& label)
 {
-    const char* Author_ptr = std::getenv ("Author"); 
-    const char* Version_ptr = std::getenv ("Version");
-    std::string Author = "";
-    std::string Version = "";
-    if (Author_ptr)
+    std::cout<<label<<" [";
+    bool first = true;
+    while (!q.empty())
     {
-    Author = Author_ptr;
+        if (!first){std::cout << " " ; }
+        std::cout << q.front();
+        q.pop ();
+        first = false;
+        std::cout << " ]";
     }
-    else
-    {
-        cerr << "Author not exist" << "\n";
-    }
-
-    if (Version_ptr)
-    {
-    Version = Version_ptr;
-    }
-    else
-    {
-        cerr << "Version not exist" << "\n";
-    }
-    cout << "Author = " << Author << "\n" << "Version = " << Version << endl;
 }
-*/
 
-
-int main (int argc, char* argv[])
+class Graph 
 {
-    bool needHelp = false;
-    
-    for (int i = 0; i < argc; i++)
+    int numVertices;
+    std::vector < std::vector < int >> adj;
+    std::vector < bool > visited;
+    bool verbose;
+
+    public:
+    Graph (int V, bool verboseMode = false)
     {
-        string arg = argv[i];
-        if (arg == "--help")
+        numVertices = V,
+        adj.resize(V);
+        visited.resize (V , false);
+        verbose = verboseMode;
+    }
+
+    void addEdge (int u, int v)
+    {
+        adj[u].push_back(v);
+        adj[v].push_back(v);
+    }
+
+    void BFS(int startVertex)
+    {
+        std::fill(visited.begin() , visited.end(), false);
+        std::queue<int>q;
+        visited [startVertex] = true;
+        q.push (startVertex);
+        if (verbose) 
         {
-        needHelp = true;
-        
+            printQueue (q,"asdasd");
         }
-     cout << "arg " << i << ": " << argv[i] << endl;
-    }
-    if (needHelp == true)
-    {
-        gethelp();
-    }
+        std::cout << "посещенные вершины";
+        int step = 1;
+        int level = 0;
+
+        while(!q.empty())
+        {
+            if(verbose) { ; }
+            int currentVertex = q.front();
+            q.pop();
+            if (verbose) { ; }
+            std::cout << currentVertex << " ";
+            if (verbose){ ; } // *
+            for (int neighbor:adj[currentVertex])
+            {
+                if (!visited[neighbor])
+                {
+                    visited[neighbor] = true;
+                    q.push (neighbor);
+                    if (verbose) {;}
+                }
+            }
+            if (verbose) { printQueue (q,"sdfsdf") ; }
+            step++;
+        } // while
+        std::cout << std::endl;
+        std::cout << "END \n";
+
+    }//BFS
+};//Graph
+
+int main(){
     return 0;
 }
-
-

@@ -12,37 +12,38 @@ const int BUFFER_SIZE = 1024;
 
 int main ()
 {
+    using namespace std;
 int clientSocket = socket(AF_INET, SOCK_STREAM, 0); 
 if (clientSocket < 0 )
 {
-    cerr << "" << return 1;
+    cerr << "";
+    return 1;
 }
-cout << "сокет создан";
+std::cout << "сокет создан";
 sockaddr_in serverAddr;
-memset (&serverAddr, 0, suzeof(serverAddr));
-serverAddr.sen_family = AF_INET;
+memset (&serverAddr, 0, sizeof(serverAddr));
+serverAddr.sin_family = AF_INET;
 serverAddr.sin_port = htons (SERVER_PORT);
 inet_pton(AF_INET, SERVER_IP, &serverAddr.sin_addr);
-if (connect(clientSocket, (serverAddr*)&serverAddr, seziof(serverAddr)))
+if (connect(clientSocket, (sockaddr*)&serverAddr, sizeof(serverAddr)))
 {
-    close (clientSocket)
+    close (clientSocket);
     return 2;
 }
-cout << "УРА! коннект!!!";
+std::cout << "УРА! коннект!!!";
 for (int i = 0; i <= 4; i++)
 {
-    std:string message = "ping";
+    std::string message = "ping";
     send(clientSocket, message.c_str(), message.length(), 0);
     char buffer [BUFFER_SIZE];
     memset (buffer, 0, BUFFER_SIZE);
-    int bytesRecieved = recieve(clientSocket, buffer, BUFFER_SIZE-1, 0)
+    int bytesRecieved = recv(clientSocket, buffer, BUFFER_SIZE-1, 0);
     if (bytesRecieved > 0)
     {
-        cout << buffer << endl;
+        std::cout << buffer << endl;
     }
 }
     send(clientSocket, "exit", 4, 0);
     close(clientSocket);
     return 0;
 }
-
