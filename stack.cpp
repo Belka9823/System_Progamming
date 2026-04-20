@@ -80,18 +80,18 @@ Graph(int v, bool verboseMode = false)
     
     if (verbose)
     {
-    std::cout << "Ищем относительно" << currentVertex << " : ";
+    std::cout << " Ищем относительно " << currentVertex << " : ";
     bool hasUnvisited = false;
     for (int neighbor : adj[currentVertex])
     {
         std::cout << neighbor;
         if (visited[neighbor])
         {
-            std::cout << "посещена"; 
+            std::cout << " посещена "; 
         }
         else 
         {
-            std::cout << "новая";
+            std::cout << " новая ";
             hasUnvisited = true;
         }
     } 
@@ -139,7 +139,7 @@ for (int neighbor : adj[Vertex])
 void DFSREcursiveWrapper (int startVertex) 
 {
 std::fill(visited.begin(), visited.end(), false);
-std::cout << "DFS recursive";
+std::cout << "DFS recursive ";
 DFSRecursive (startVertex);
 std::cout << std:: endl;
 } 
@@ -156,6 +156,6 @@ int main()
         g1.addEdge(0, 4); 
         g1.addEdge(4, 5); 
 
-        g1.DFS(0);
+        g1.DFSREcursiveWrapper(0);
 
 }

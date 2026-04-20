@@ -93,7 +93,7 @@ int main(){
         g1.BFS(0);
 
 //
-
+/*
         Graph g2(7, true);
         g2.addEdge(0, 1);
         g2.addEdge(1, 3); 
@@ -162,7 +162,7 @@ int main(){
         g6.addEdge(10, 11);
 
 
-        g6.BFS(0);
+        g6.BFS(0); */
 
 
     return 0;
